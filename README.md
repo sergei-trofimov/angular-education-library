@@ -1,1 +1,1 @@
-# angular-education-library
+# Angular education library
