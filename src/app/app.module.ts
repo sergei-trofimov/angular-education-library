@@ -1,22 +1,19 @@
-import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
-import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 // import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 // import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 // import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
-import { environment } from '../environments/environment';
-
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +22,6 @@ import { environment } from '../environments/environment';
     SharedModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

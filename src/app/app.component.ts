@@ -1,6 +1,8 @@
+import { LanguagesE } from '../assets/i18n/config/language.config';
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, DocumentChangeAction } from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { LanguageService } from './shared/services/translate/language.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +12,11 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   public users!: Observable<{name: string, personalInfo: string}[]>;
   public user!: { name: string, personalInfo: string, userId: string };
+  public languages: typeof LanguagesE = LanguagesE;
 
-  constructor(private fire: AngularFirestore) {
+  constructor(private fire: AngularFirestore, private lang: LanguageService) {
     this.users = fire.collection<{name: string, personalInfo: string}>('users').valueChanges();
+    this.lang.setDefaultLang();
   }
 
   ngOnInit() {
@@ -20,9 +24,9 @@ export class AppComponent implements OnInit {
     this.getAll();
     // this.updateUser();
     // this.removeUser();
-    setTimeout(() => {
-      this.removeUser(this.user.userId);
-    }, 3000);
+    // setTimeout(() => {
+    //   this.removeUser(this.user.userId);
+    // }, 3000);
   }
 
   removeUser(id: string) {
@@ -63,5 +67,13 @@ export class AppComponent implements OnInit {
 
   postUser() {
     this.fire.collection('users').add({ name: 'Max', personalInfo: 'some info'});
+  }
+
+  switch(l: LanguagesE) {
+    this.lang.switchLanguage(l);
+  }
+
+  buildTranslationKey(relativeKey: string): string {
+    return `${relativeKey}`;
   }
 }
